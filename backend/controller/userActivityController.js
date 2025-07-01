@@ -1,5 +1,5 @@
 import UserActivity from '../models/userActivity.model.js';
-import User from '../models/user.model.js';
+import User from '../models/User.model.js';
 
 export const getAllActivity = async (req, res) => {
   try {
