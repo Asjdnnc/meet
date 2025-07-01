@@ -6,7 +6,5 @@ const userRouter = Router()
 
 userRouter.post('/login',login)
 userRouter.post('/signup',signup)
-userRouter.route('/add ')
-userRouter.route('/get')
 userRouter.use('/activity',activityRouter)
 export default userRouter;

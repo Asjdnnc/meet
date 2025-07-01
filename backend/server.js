@@ -6,9 +6,13 @@ import {Server} from "socket.io"
 import {createServer} from 'http'
 import cors from 'cors'
 import connectToSocket from './controller/socketManager.js'
+import path from 'path'
+import { dirname } from 'path'
+import { fileURLToPath } from 'url'
 const app = express();
 const port = 8080;
 import userRouter from './route/users.route.js';
+import activityRouter from './route/activity.route.js';
 
 dotenv.config();
 app.use(cors({
@@ -38,11 +42,17 @@ app.set("port",(process.env.PORT || port));
 
 app.use("/users",userRouter);
 
-app.get('/', (req, res) => {
-  res.json('Welcome to the Meet App Backend!');
-}
-);
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+// Serve static files from the client directory
+app.use(express.static(path.join(__dirname, 'client')));
 
 server.listen(app.get("port"), () => {
   console.log(`Server is running on http://localhost:${port}`);
+});
+
+// For any other route, serve index.html (for SPA routing)
+app.get(/^\/(?!users|api).*/, (req, res) => {
+  res.sendFile(path.join(__dirname, 'client', 'index.html'));
 });
