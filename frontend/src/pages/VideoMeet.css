@@ -1,0 +1,1456 @@
+/* VideoMeet Lobby Styles */
+.lobby-container {
+    min-height: 100vh;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.lobby-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.lobby-shape {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    animation: float 6s ease-in-out infinite;
+}
+
+.lobby-shape.shape-1 {
+    width: 300px;
+    height: 300px;
+    top: 10%;
+    left: 10%;
+    animation-delay: 0s;
+}
+
+.lobby-shape.shape-2 {
+    width: 200px;
+    height: 200px;
+    top: 20%;
+    right: 15%;
+    animation-delay: 2s;
+}
+
+.lobby-shape.shape-3 {
+    width: 150px;
+    height: 150px;
+    bottom: 20%;
+    left: 20%;
+    animation-delay: 4s;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(180deg); }
+}
+
+.lobby-content {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    max-width: 500px;
+    padding: 20px;
+}
+
+.lobby-card {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    border-radius: 24px;
+    padding: 40px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    animation: slideInUp 0.8s ease-out;
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.lobby-header {
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+.lobby-icon {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 24px;
+    color: white;
+    font-size: 36px;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+.lobby-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #1a202c;
+    margin-bottom: 8px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.lobby-subtitle {
+    font-size: 1.125rem;
+    color: #64748b;
+    margin: 0;
+    line-height: 1.5;
+}
+
+.lobby-form {
+    margin-bottom: 32px;
+}
+
+.lobby-controls {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    margin-bottom: 24px;
+    padding: 20px;
+    background: rgba(102, 126, 234, 0.05);
+    border-radius: 16px;
+    border: 1px solid rgba(102, 126, 234, 0.1);
+}
+
+.control-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.control-label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #64748b;
+    text-align: center;
+}
+
+.control-button {
+    width: 56px !important;
+    height: 56px !important;
+    border-radius: 50% !important;
+    transition: all 0.3s ease !important;
+    border: 2px solid transparent !important;
+}
+
+.control-button.active {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    color: white !important;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3) !important;
+}
+
+.control-button.active:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4) !important;
+}
+
+.control-button.inactive {
+    background: #f1f5f9 !important;
+    color: #64748b !important;
+    border-color: #e2e8f0 !important;
+}
+
+.control-button.inactive:hover {
+    background: #e2e8f0 !important;
+    color: #475569 !important;
+    transform: translateY(-1px) !important;
+}
+
+.control-button svg {
+    font-size: 24px !important;
+}
+
+.input-group {
+    margin-bottom: 24px;
+}
+
+.username-input {
+    width: 100%;
+}
+
+.username-input .MuiOutlinedInput-root {
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.8);
+    transition: all 0.3s ease;
+}
+
+.username-input .MuiOutlinedInput-root:hover {
+    background: rgba(255, 255, 255, 0.9);
+}
+
+.username-input .MuiOutlinedInput-root.Mui-focused {
+    background: white;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+}
+
+.username-input .MuiOutlinedInput-notchedOutline {
+    border-color: rgba(102, 126, 234, 0.3);
+    border-width: 2px;
+}
+
+.username-input .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+    border-color: #667eea;
+}
+
+.join-button {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    color: white !important;
+    padding: 16px 32px !important;
+    border-radius: 12px !important;
+    font-size: 1.125rem !important;
+    font-weight: 600 !important;
+    text-transform: none !important;
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3) !important;
+    transition: all 0.3s ease !important;
+}
+
+.join-button:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 12px 35px rgba(102, 126, 234, 0.4) !important;
+}
+
+.join-button:disabled {
+    opacity: 0.6 !important;
+    transform: none !important;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.2) !important;
+}
+
+.lobby-preview {
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    padding-top: 24px;
+}
+
+.preview-header {
+    text-align: center;
+    margin-bottom: 16px;
+}
+
+.preview-header h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #1a202c;
+    margin: 0;
+}
+
+.video-preview-container {
+    position: relative;
+    width: 100%;
+    height: 200px;
+    border-radius: 16px;
+    overflow: hidden;
+    background: #1a1a1a;
+    border: 2px solid rgba(102, 126, 234, 0.2);
+}
+
+.preview-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 14px;
+}
+
+.preview-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 14px;
+}
+
+.preview-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    color: white;
+}
+
+.preview-icon {
+    font-size: 32px !important;
+    opacity: 0.8;
+}
+
+.preview-info span {
+    font-size: 0.875rem;
+    font-weight: 500;
+    opacity: 0.9;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .lobby-content {
+        padding: 16px;
+    }
+    
+    .lobby-card {
+        padding: 24px;
+    }
+    
+    .lobby-title {
+        font-size: 2rem;
+    }
+    
+    .lobby-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 28px;
+    }
+    
+    .video-preview-container {
+        height: 150px;
+    }
+    
+    .lobby-controls {
+        gap: 24px;
+        padding: 16px;
+    }
+    
+    .control-button {
+        width: 48px !important;
+        height: 48px !important;
+    }
+    
+    .control-button svg {
+        font-size: 20px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .lobby-card {
+        padding: 20px;
+    }
+    
+    .lobby-title {
+        font-size: 1.75rem;
+    }
+    
+    .lobby-subtitle {
+        font-size: 1rem;
+    }
+    
+    .video-preview-container {
+        height: 120px;
+    }
+    
+    .lobby-controls {
+        gap: 16px;
+        padding: 12px;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .control-item {
+        flex-direction: row;
+        gap: 12px;
+    }
+    
+    .control-button {
+        width: 44px !important;
+        height: 44px !important;
+    }
+    
+    .control-button svg {
+        font-size: 18px !important;
+    }
+}
+
+/* Smooth transitions */
+* {
+    transition: all 0.3s ease;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, #5a67d8 0%, #6b46c1 100%);
+}
+
+/* Video Call Interface Styles - Google Meet Inspired */
+.video-call-container {
+    min-height: 100vh;
+    background: #202124;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    font-family: 'Google Sans', 'Roboto', Arial, sans-serif;
+}
+
+/* Call Header - Google Meet Style */
+.call-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 24px;
+    background: rgba(32, 33, 36, 0.95);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    z-index: 100;
+    min-height: 64px;
+}
+
+.call-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.call-icon {
+    width: 40px;
+    height: 40px;
+    background: #8ab4f8;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #202124;
+    font-size: 20px;
+}
+
+.call-title {
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: #e8eaed;
+    margin: 0;
+    font-family: 'Google Sans', 'Roboto', Arial, sans-serif;
+}
+
+.call-subtitle {
+    font-size: 0.875rem;
+    color: #9aa0a6;
+    margin: 2px 0 0 0;
+    font-weight: 400;
+}
+
+.end-call-btn {
+    background: #ea4335 !important;
+    color: white !important;
+    border: none !important;
+    padding: 10px 20px !important;
+    border-radius: 8px !important;
+    font-weight: 500 !important;
+    text-transform: none !important;
+    font-size: 0.875rem !important;
+    transition: all 0.2s ease !important;
+    font-family: 'Google Sans', 'Roboto', Arial, sans-serif;
+}
+
+.end-call-btn:hover {
+    background: #d93025 !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 4px 12px rgba(234, 67, 53, 0.3) !important;
+}
+
+/* Main Video Area */
+.video-main-area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+    gap: 16px;
+    position: relative;
+    height: calc(100vh - 80px);
+    overflow: hidden;
+    background: #202124;
+}
+
+/* Remote Videos Container - Google Meet Style */
+.remote-videos-container {
+    display: grid;
+    gap: 12px;
+    padding: 16px;
+    height: 100%;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    max-height: calc(100vh - 200px);
+    overflow: hidden;
+}
+
+.remote-videos-container.participants-0 {
+    grid-template-columns: 1fr;
+    place-items: center;
+}
+
+.remote-videos-container.participants-1 {
+    grid-template-columns: 1fr;
+    place-items: center;
+}
+
+.remote-videos-container.participants-1 .remote-video-item {
+    max-width: 1200px;
+    max-height: 1000px;
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 16/9;
+}
+
+.remote-videos-container.participants-1 .remote-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.remote-videos-container.participants-2 {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+}
+
+.remote-videos-container.participants-2 .remote-video-item {
+    max-height: 450px;
+    aspect-ratio: 16/9;
+}
+
+.remote-videos-container.participants-3,
+.remote-videos-container.participants-4 {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 12px;
+}
+
+.remote-videos-container.participants-3 .remote-video-item,
+.remote-videos-container.participants-4 .remote-video-item {
+    max-height: 380px;
+    aspect-ratio: 16/9;
+}
+
+.remote-videos-container.participants-5,
+.remote-videos-container.participants-6 {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.remote-videos-container.participants-5 .remote-video-item,
+.remote-videos-container.participants-6 .remote-video-item {
+    max-height: 320px;
+    aspect-ratio: 16/9;
+}
+
+.remote-videos-container.participants-7,
+.remote-videos-container.participants-8 {
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 8px;
+}
+
+.remote-videos-container.participants-7 .remote-video-item,
+.remote-videos-container.participants-8 .remote-video-item {
+    max-height: 280px;
+    aspect-ratio: 16/9;
+}
+
+.remote-video-item {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #3c4043;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.2s ease;
+}
+
+.remote-video-item:hover {
+    transform: scale(1.02);
+    border-color: rgba(138, 180, 248, 0.3);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.remote-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    background: #3c4043;
+    border-radius: 7px;
+}
+
+/* Remote Video Overlay - Google Meet Style */
+.remote-video-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.6));
+    padding: 16px 12px 12px 12px;
+    color: white;
+    border-radius: 0 0 8px 8px;
+    z-index: 5;
+}
+
+.remote-video-overlay .participant-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.remote-video-overlay .participant-name {
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.7);
+    font-family: 'Google Sans', 'Roboto', Arial, sans-serif;
+}
+
+.remote-video-overlay .participant-status {
+    display: flex;
+    gap: 4px;
+}
+
+.remote-video-overlay .status-icon {
+    font-size: 27px !important;
+    color: #ea4335;
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 50%;
+    padding: 5px;
+    backdrop-filter: blur(4px);
+    z-index: 10;
+}
+
+/* Floating Local Video - Google Meet Style */
+.floating-local-video {
+    position: fixed;
+    bottom: 100px;
+    right: 24px;
+    width: 340px;
+    height: 200px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    z-index: 1000;
+    background: #3c4043;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.2s ease;
+}
+
+.floating-local-video:hover {
+    transform: scale(1.05);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
+    border-color: rgba(138, 180, 248, 0.4);
+}
+
+.local-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    background: #3c4043;
+    border-radius: 6px;
+}
+
+.local-video-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.6));
+    padding: 12px 8px 8px 8px;
+    color: white;
+    border-radius: 0 0 8px 8px;
+    z-index: 5;
+}
+
+.local-video-overlay .participant-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.local-video-overlay .participant-name {
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.7);
+    font-family: 'Google Sans', 'Roboto', Arial, sans-serif;
+}
+
+.local-video-overlay .participant-status {
+    display: flex;
+    gap: 4px;
+}
+
+.local-video-overlay .status-icon {
+    font-size: 19px !important;
+    color: #ea4335;
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 50%;
+    padding: 4px;
+    backdrop-filter: blur(4px);
+    z-index: 10;
+}
+
+/* Control Bar - Google Meet Style */
+.control-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(32, 33, 36, 0.95);
+    backdrop-filter: blur(20px);
+    padding: 16px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1001;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    min-height: 80px;
+}
+
+.control-group {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.control-btn {
+    width: 48px !important;
+    height: 48px !important;
+    border-radius: 50% !important;
+    background: rgba(255, 255, 255, 0.1) !important;
+    color: #e8eaed !important;
+    transition: all 0.2s ease !important;
+    border: none !important;
+}
+
+.control-btn:hover {
+    background: rgba(255, 255, 255, 0.2) !important;
+    transform: scale(1.05) !important;
+}
+
+.control-btn.active {
+    background: #34a853 !important;
+    color: white !important;
+}
+
+.control-btn.inactive {
+    background: #ea4335 !important;
+    color: white !important;
+}
+
+.control-btn.chat-btn {
+    background: rgba(255, 255, 255, 0.1) !important;
+    color: #e8eaed !important;
+}
+
+.control-btn svg {
+    font-size: 24px !important;
+}
+
+/* Chat Modal - Google Meet Style */
+.chat-modal {
+    position: fixed;
+    top: 60%;
+    right: 24px;
+    transform: translateY(-50%);
+    width: 420px;
+    height: 580px;
+    background: rgba(32, 33, 36, 0.95);
+    backdrop-filter: blur(20px);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+    z-index: 1000;
+    animation: slideInRight 0.3s ease-out;
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateY(-50%) translateX(-100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(-50%) translateX(0);
+    }
+}
+
+.chat-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(32, 33, 36, 0.8);
+    border-radius: 12px 12px 0 0;
+}
+
+.chat-header h3 {
+    font-size: 1.125rem;
+    font-weight: 500;
+    color: #e8eaed;
+    margin: 0;
+    font-family: 'Google Sans', 'Roboto', Arial, sans-serif;
+}
+
+.close-chat-btn {
+    width: 32px !important;
+    height: 32px !important;
+    color: #9aa0a6 !important;
+    font-size: 20px !important;
+    background: rgba(255, 255, 255, 0.1) !important;
+    border-radius: 50% !important;
+}
+
+.close-chat-btn:hover {
+    background: rgba(255, 255, 255, 0.2) !important;
+    color: #e8eaed !important;
+}
+
+.chat-messages {
+    flex: 1;
+    padding: 16px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background: rgba(32, 33, 36, 0.5);
+}
+
+.chat-message {
+    background: rgba(138, 180, 248, 0.1);
+    border-radius: 12px;
+    padding: 12px;
+    border-left: 3px solid #8ab4f8;
+}
+
+.message-sender {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #8ab4f8;
+    margin-bottom: 4px;
+    font-family: 'Google Sans', 'Roboto', Arial, sans-serif;
+}
+
+.message-content {
+    font-size: 0.875rem;
+    color: #e8eaed;
+    line-height: 1.4;
+}
+
+.no-messages {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: #9aa0a6;
+    text-align: center;
+}
+
+.no-messages-icon {
+    font-size: 48px !important;
+    margin-bottom: 16px;
+    opacity: 0.5;
+    color: #9aa0a6;
+}
+
+.no-messages p {
+    font-size: 1rem;
+    font-weight: 500;
+    margin: 0 0 4px 0;
+    color: #e8eaed;
+    font-family: 'Google Sans', 'Roboto', Arial, sans-serif;
+}
+
+.no-messages span {
+    font-size: 0.875rem;
+    opacity: 0.7;
+    color: #9aa0a6;
+}
+
+.chat-input {
+    padding: 16px 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    background: rgba(32, 33, 36, 0.8);
+    border-radius: 0 0 12px 12px;
+}
+
+.chat-input .MuiOutlinedInput-root {
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.chat-input .MuiOutlinedInput-root:hover {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.chat-input .MuiOutlinedInput-root.Mui-focused {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: #8ab4f8;
+}
+
+.chat-input .MuiOutlinedInput-input {
+    color: #e8eaed !important;
+}
+
+.chat-input .MuiOutlinedInput-notchedOutline {
+    border: none;
+}
+
+.send-btn {
+    background: #8ab4f8 !important;
+    color: #202124 !important;
+    padding: 10px 16px !important;
+    border-radius: 8px !important;
+    font-weight: 500 !important;
+    text-transform: none !important;
+    min-width: 70px !important;
+    font-family: 'Google Sans', 'Roboto', Arial, sans-serif;
+}
+
+.send-btn:hover {
+    background: #aecbfa !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 4px 12px rgba(138, 180, 248, 0.3) !important;
+}
+
+.send-btn:disabled {
+    opacity: 0.6 !important;
+    transform: none !important;
+    background: #5f6368 !important;
+    color: #9aa0a6 !important;
+}
+
+/* Connection Status Styles */
+.connection-status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 4px;
+    font-size: 12px;
+    font-weight: 500;
+    color: #9aa0a6;
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+}
+
+.connection-status.connecting .status-dot {
+    background-color: #fbbc04;
+}
+
+.connection-status.reconnecting .status-dot {
+    background-color: #fbbc04;
+}
+
+.connection-status.error .status-dot {
+    background-color: #ea4335;
+}
+
+.connection-status.disconnected .status-dot {
+    background-color: #9aa0a6;
+}
+
+.status-text {
+    color: inherit;
+    opacity: 0.8;
+    font-family: 'Google Sans', 'Roboto', Arial, sans-serif;
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Responsive Design - Google Meet Style */
+@media (max-width: 1024px) {
+    .video-main-area {
+        height: calc(100vh - 80px);
+        padding: 12px;
+    }
+    
+    .remote-videos-container {
+        padding: 12px;
+        gap: 10px;
+        max-height: calc(100vh - 180px);
+    }
+    
+    /* Adjust grid for smaller screens */
+    .remote-videos-container.participants-1 .remote-video-item {
+        max-width: 700px;
+        max-height: 450px;
+    }
+    
+    .remote-videos-container.participants-2 .remote-video-item {
+        max-height: 400px;
+    }
+    
+    .remote-videos-container.participants-3 .remote-video-item,
+    .remote-videos-container.participants-4 .remote-video-item {
+        max-height: 320px;
+    }
+    
+    .remote-videos-container.participants-5 .remote-video-item,
+    .remote-videos-container.participants-6 .remote-video-item {
+        max-height: 280px;
+    }
+    
+    .floating-local-video {
+        width: 200px;
+        height: 112px;
+        bottom: 90px;
+        right: 16px;
+    }
+    
+    .chat-modal {
+        right: 16px;
+        width: 280px;
+        height: 400px;
+    }
+    
+    /* Status icons for tablet */
+    .remote-video-overlay .status-icon {
+        font-size: 18px !important;
+        padding: 5px;
+    }
+    
+    .local-video-overlay .status-icon {
+        font-size: 16px !important;
+        padding: 4px;
+    }
+}
+
+@media (max-width: 768px) {
+    .call-header {
+        padding: 12px 16px;
+        min-height: 56px;
+    }
+    
+    .call-title {
+        font-size: 1.125rem;
+    }
+    
+    .call-icon {
+        width: 36px;
+        height: 36px;
+        font-size: 18px;
+    }
+    
+    .video-main-area {
+        padding: 8px;
+        height: calc(100vh - 56px);
+    }
+    
+    .remote-videos-container {
+        padding: 8px;
+        gap: 8px;
+        max-height: calc(100vh - 140px);
+    }
+    
+    /* Mobile grid adjustments */
+    .remote-videos-container.participants-1 {
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr;
+    }
+    
+    .remote-videos-container.participants-1 .remote-video-item {
+        max-width: 100%;
+        max-height: 350px;
+    }
+    
+    .remote-videos-container.participants-2 {
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(2, 1fr);
+        gap: 10px;
+    }
+    
+    .remote-videos-container.participants-2 .remote-video-item {
+        max-height: 280px;
+    }
+    
+    .remote-videos-container.participants-3,
+    .remote-videos-container.participants-4 {
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(4, 1fr);
+        gap: 8px;
+    }
+    
+    .remote-videos-container.participants-3 .remote-video-item,
+    .remote-videos-container.participants-4 .remote-video-item {
+        max-height: 220px;
+    }
+    
+    .remote-videos-container.participants-5,
+    .remote-videos-container.participants-6 {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(3, 1fr);
+        gap: 6px;
+    }
+    
+    .remote-videos-container.participants-5 .remote-video-item,
+    .remote-videos-container.participants-6 .remote-video-item {
+        max-height: 180px;
+    }
+    
+    .remote-videos-container.participants-7,
+    .remote-videos-container.participants-8 {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(4, 1fr);
+        gap: 5px;
+    }
+    
+    .remote-videos-container.participants-7 .remote-video-item,
+    .remote-videos-container.participants-8 .remote-video-item {
+        max-height: 150px;
+    }
+    
+    .remote-video-overlay {
+        padding: 12px 8px 8px 8px;
+    }
+    
+    .remote-video-overlay .participant-name {
+        font-size: 0.75rem;
+    }
+    
+    .remote-video-overlay .status-icon {
+        font-size: 16px !important;
+        padding: 4px;
+    }
+    
+    .local-video-overlay .status-icon {
+        font-size: 14px !important;
+        padding: 3px;
+    }
+    
+    .control-bar {
+        padding: 12px 16px;
+        min-height: 72px;
+    }
+    
+    .control-btn {
+        width: 44px !important;
+        height: 44px !important;
+    }
+    
+    .control-btn svg {
+        font-size: 20px !important;
+    }
+    
+    .chat-modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 0;
+        transform: none;
+    }
+    
+    .floating-local-video {
+        width: 160px;
+        height: 90px;
+        bottom: 80px;
+        right: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .call-info {
+        gap: 8px;
+    }
+    
+    .call-icon {
+        width: 32px;
+        height: 32px;
+        font-size: 16px;
+    }
+    
+    .call-title {
+        font-size: 1rem;
+    }
+    
+    .end-call-btn {
+        padding: 8px 12px !important;
+        font-size: 0.75rem !important;
+    }
+    
+    .video-main-area {
+        padding: 6px;
+        height: calc(100vh - 48px);
+    }
+    
+    .remote-videos-container {
+        padding: 6px;
+        gap: 5px;
+        max-height: calc(100vh - 120px);
+    }
+    
+    .remote-videos-container.participants-1 .remote-video-item {
+        max-height: 280px;
+    }
+    
+    .remote-videos-container.participants-2 .remote-video-item {
+        max-height: 220px;
+    }
+    
+    .remote-videos-container.participants-3 .remote-video-item,
+    .remote-videos-container.participants-4 .remote-video-item {
+        max-height: 180px;
+    }
+    
+    .control-group {
+        gap: 6px;
+    }
+    
+    .control-btn {
+        width: 40px !important;
+        height: 40px !important;
+    }
+    
+    .control-btn svg {
+        font-size: 18px !important;
+    }
+    
+    .floating-local-video {
+        width: 120px;
+        height: 67px;
+        bottom: 70px;
+        right: 8px;
+    }
+    
+    .remote-video-overlay {
+        padding: 8px 6px 6px 6px;
+    }
+    
+    .remote-video-overlay .participant-name {
+        font-size: 0.625rem;
+    }
+    
+    .remote-video-overlay .status-icon {
+        font-size: 14px !important;
+        padding: 3px;
+    }
+    
+    .local-video-overlay .status-icon {
+        font-size: 12px !important;
+        padding: 2px;
+    }
+}
+
+/* Video Off Overlay - Google Meet Style */
+.video-off-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #3c4043;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    z-index: 2;
+}
+
+.user-icon-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 80px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    backdrop-filter: blur(4px);
+}
+
+.user-icon {
+    font-size: 48px !important;
+    color: rgba(255, 255, 255, 0.8) !important;
+}
+
+/* Smaller user icon for floating local video */
+.floating-local-video .user-icon-container {
+    width: 60px;
+    height: 60px;
+}
+
+.floating-local-video .user-icon {
+    font-size: 36px !important;
+}
+
+/* Responsive user icon sizes */
+@media (max-width: 768px) {
+    .user-icon-container {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .user-icon {
+        font-size: 36px !important;
+    }
+    
+    .floating-local-video .user-icon-container {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .floating-local-video .user-icon {
+        font-size: 24px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .user-icon-container {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .user-icon {
+        font-size: 30px !important;
+    }
+    
+    .floating-local-video .user-icon-container {
+        width: 32px;
+        height: 32px;
+    }
+    
+    .floating-local-video .user-icon {
+        font-size: 20px !important;
+    }
+}
+
+.screen-share-layout {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    width: 100%;
+    gap: 0;
+    background: none;
+}
+
+.main-screen-share {
+    flex: 1 1 0;
+    min-width: 0;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background: #222;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.main-video {
+    width: 100%;
+    height: 100%;
+    min-height: 400px;
+    min-width: 0;
+    object-fit: contain;
+    background: #222;
+    border-radius: 12px;
+}
+
+.screen-share-label {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    background: rgba(0,0,0,0.7);
+    color: #fff;
+    padding: 6px 16px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    z-index: 10;
+}
+
+.thumbnails-bar {
+    width: 220px;
+    min-width: 180px;
+    max-width: 260px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 8px 0;
+    overflow-y: auto;
+    background: rgba(32,33,36,0.95);
+    border-left: 1px solid rgba(255,255,255,0.08);
+    box-shadow: -2px 0 12px rgba(0,0,0,0.08);
+}
+
+.thumbnail-video-item {
+    width: 200px;
+    height: 112px;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #3c4043;
+    border: 1px solid rgba(255,255,255,0.1);
+    position: relative;
+    flex-shrink: 0;
+}
+
+.thumbnail-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    background: #3c4043;
+    border-radius: 8px;
+} 
