@@ -1202,10 +1202,18 @@
     }
     
     .floating-local-video {
-        width: 160px;
-        height: 90px;
-        bottom: 80px;
-        right: 12px;
+        width: 80vw;
+        height: 45vw;
+        min-width: 220px;
+        min-height: 124px;
+        max-width: 100vw;
+        max-height: 56vw;
+        bottom: 60px;
+        right: 4vw;
+    }
+
+    .chat-input {
+        margin-bottom: 48px;
     }
 }
 
@@ -1267,10 +1275,18 @@
     }
     
     .floating-local-video {
-        width: 120px;
-        height: 67px;
-        bottom: 70px;
-        right: 8px;
+        width: 66vw;
+        height: 40vw;
+        min-width: 180px;
+        min-height: 101px;
+        max-width: 100vw;
+        max-height: 60vw;
+        bottom: 80px;
+        right: 2vw;
+    }
+
+    .chat-input {
+        margin-bottom: 64px;
     }
     
     .remote-video-overlay {

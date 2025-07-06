@@ -102,6 +102,13 @@ export default function connectToSocket(server){
             }
         })
 
+        socket.on("username-update", (toId, newUsername) => {
+            // Update the server's userNames map
+            userNames[socket.id] = newUsername || 'Anonymous';
+            // Send the new username to the target participant
+            io.to(toId).emit("username-update", socket.id, newUsername || 'Anonymous');
+        });
+
         socket.on("disconnect", () => {
             console.log(`User ${userNames[socket.id] || 'Unknown'} (${socket.id}) disconnected`);
 

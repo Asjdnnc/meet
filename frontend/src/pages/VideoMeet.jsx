@@ -95,6 +95,47 @@ export default function VideoMeet() {
     // Connection status
     let [connectionStatus, setConnectionStatus] = useState('disconnected');
 
+    // Add state for error and retry
+    const [joinError, setJoinError] = useState(false);
+
+    // Add state for network quality
+    const [networkQuality, setNetworkQuality] = useState({});
+
+    // Helper to compute quality from stats
+    function computeQuality(stats) {
+        // Simple: use outbound-rtp/remote-inbound-rtp packet loss and RTT
+        let quality = 3; // 3: good, 2: fair, 1: poor
+        let packetsLost = 0, packetsSent = 0, rtt = 0;
+        stats.forEach(report => {
+            if (report.type === 'remote-inbound-rtp' && report.kind === 'video') {
+                packetsLost += report.packetsLost || 0;
+                packetsSent += report.packetsReceived || 0;
+                rtt = report.roundTripTime || 0;
+            }
+        });
+        if (packetsLost > 10 || rtt > 0.5) quality = 1;
+        else if (packetsLost > 0 || rtt > 0.2) quality = 2;
+        return quality;
+    }
+
+    // Periodically poll stats for each connection
+    useEffect(() => {
+        const interval = setInterval(() => {
+            const newQualities = {};
+            Object.keys(connections).forEach(id => {
+                const pc = connections[id];
+                if (pc && typeof pc.getStats === 'function') {
+                    pc.getStats(null).then(stats => {
+                        const arr = Array.from(stats.values());
+                        newQualities[id] = computeQuality(arr);
+                        setNetworkQuality(q => ({ ...q, [id]: newQualities[id] }));
+                    });
+                }
+            });
+        }, 2000);
+        return () => clearInterval(interval);
+    }, [videos]);
+
     // TODO
     // if(isChrome() === false) {
 
@@ -539,7 +580,7 @@ export default function VideoMeet() {
 
             socketRef.current.on('user-left', (id) => {
                 console.log('User left:', id);
-                setVideos((videos) => videos.filter((video) => video.socketId !== id))
+                setVideos((videos) => videos.filter((video) => video.socketId !== id));
                 // Remove participant status and name when they leave
                 setParticipantStatuses(prev => {
                     const newStatuses = { ...prev };
@@ -551,6 +592,13 @@ export default function VideoMeet() {
                     delete newNames[id];
                     return newNames;
                 });
+                // Remove from videoRef
+                videoRef.current = videoRef.current.filter((video) => video.socketId !== id);
+                // Close and delete the RTCPeerConnection
+                if (connections[id]) {
+                    try { connections[id].close(); } catch (e) { console.log(e); }
+                    delete connections[id];
+                }
             })
 
             socketRef.current.on('username-update', (id, name) => {
@@ -716,6 +764,7 @@ export default function VideoMeet() {
         socketRef.current.on('connect_error', (error) => {
             console.error('Connection error:', error);
             setConnectionStatus('error');
+            setJoinError(true);
         })
 
         socketRef.current.on('reconnect', (attemptNumber) => {
@@ -909,15 +958,15 @@ export default function VideoMeet() {
                 {videos.map((video) => {
                     const participantStatus = participantStatuses[video.socketId] || { video: true, audio: true };
                     const participantName = participantNames[video.socketId] || 'Participant';
+                    const quality = networkQuality[video.socketId] || 3;
+                    let color = '#34a853'; // green
+                    if (quality === 2) color = '#fbbc04'; // yellow
+                    if (quality === 1) color = '#ea4335'; // red
                     return (
                         <div key={video.socketId} className="remote-video-item">
-                            <video
+                            <VideoPlayer
                                 data-socket={video.socketId}
-                                ref={ref => {
-                                    if (ref && video.stream) {
-                                        ref.srcObject = video.stream;
-                                    }
-                                }}
+                                stream={video.stream}
                                 autoPlay
                                 className="remote-video"
                             />
@@ -931,7 +980,10 @@ export default function VideoMeet() {
                             )}
                             <div className="remote-video-overlay">
                                 <div className="participant-info">
-                                    <span className="participant-name">{participantName}</span>
+                                    <span className="participant-name">
+                                        <span style={{ display: 'inline-block', width: 10, height: 10, borderRadius: '50%', background: color, marginRight: 6, verticalAlign: 'middle' }}></span>
+                                        {participantName}
+                                    </span>
                                     <div className="participant-status">
                                         {!participantStatus.video && <VideocamOffIcon className="status-icon" />}
                                         {!participantStatus.audio && <MicOffIcon className="status-icon" />}
@@ -943,7 +995,7 @@ export default function VideoMeet() {
                 })}
             </div>
         );
-    }, [videos, participantStatuses, participantNames]);
+    }, [videos, participantStatuses, participantNames, networkQuality]);
 
     // Memoized local video component
     const LocalVideo = useMemo(() => {
@@ -1050,6 +1102,22 @@ export default function VideoMeet() {
         }
     }, []);
 
+    // Add this effect after username state is set up and socketRef is initialized
+    useEffect(() => {
+        if (!askForUsername && socketRef.current && socketRef.current.connected && username && socketIdRef.current) {
+            // Broadcast username update to all other participants
+            Object.keys(participantNames).forEach((participantId) => {
+                if (participantId !== socketIdRef.current) {
+                    socketRef.current.emit('username-update', participantId, username);
+                }
+            });
+        }
+        // Also update localStorage
+        if (username) {
+            localStorage.setItem('username', username);
+        }
+    }, [username]);
+
     // Debug effect to track username changes
     useEffect(() => {
         console.log('Current username state:', {
@@ -1070,8 +1138,23 @@ export default function VideoMeet() {
         };
     }, []);
 
-                                    return (
+    // Add a retry handler
+    const handleRetryJoin = () => {
+        setJoinError(false);
+        connectToSocketServer();
+    };
+
+    return (
         <div>
+            {joinError ? (
+                <div style={{ padding: 32, textAlign: 'center', color: '#ea4335', background: '#fff3f3', borderRadius: 12, margin: 32 }}>
+                    <h2>Connection Error</h2>
+                    <p>There was a problem joining the meeting. Please check your internet connection and try again.</p>
+                    <Button variant="contained" color="primary" onClick={handleRetryJoin} style={{ marginTop: 16 }}>
+                        Retry Connection
+                    </Button>
+                </div>
+            ) : null}
 
             {askForUsername === true ?
 
@@ -1279,4 +1362,14 @@ export default function VideoMeet() {
 
         </div>
     )
+}
+
+function VideoPlayer({ stream, ...props }) {
+  const videoRef = useRef();
+  useEffect(() => {
+    if (videoRef.current && stream) {
+      videoRef.current.srcObject = stream;
+    }
+  }, [stream]);
+  return <video ref={videoRef} {...props} />;
 }
