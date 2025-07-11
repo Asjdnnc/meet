@@ -38,4 +38,11 @@ export const login = async (req, res) => {
     await user.save();
     return res.status(200).json({message: 'Login successful', token: user.token});
 }
+export const allUser = async (req, res) => {
+    console.log('Fetching all users');
+    const users = await User.find({});
+    console.log('Users fetched:', users);
+    return res.status(200).json(users);
+}
+
 
