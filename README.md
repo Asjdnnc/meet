@@ -30,7 +30,7 @@ A real-time video conferencing application built with React, Node.js, Socket.io,
 
 ### Devops
 - Docker image is created to install on a server
-- integrated with CI/CD pipeline using github actions
+- integrated with CI/CD pipeline using github actions workflow
 
 ## 📁 Project Structure
 
